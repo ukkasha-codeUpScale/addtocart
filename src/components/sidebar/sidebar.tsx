@@ -1,6 +1,14 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
+import { cartDataContext } from "../Layout";
+
 
 const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
+
+    const val = useContext(cartDataContext);
+    const str = val?.strContext.another;
+    console.log(val,"============SIDEBAR")
+
+
   return (
     <div>
       <button
@@ -27,8 +35,9 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
       <hr className="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
 
       <h3 className="mt-2 text-4xl font-semibold text-white">
-        All items in Cart will be displayed here
+        All items in Cart will be displayed here....
       </h3>
+
     </div>
   );
 };

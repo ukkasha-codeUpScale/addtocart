@@ -1,10 +1,18 @@
 // components/Navbar.js or components/Navbar.tsx
 import Link from "next/link";
 import Sidebar from "../sidebar/sidebar";
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
+import { cartDataContext } from "../Layout";
 
 export default function Navbar() {
   const [showSidebar, setShowSidebar] = useState(false);
+
+  const val = useContext(cartDataContext);
+  const str = val?.strContext.str1;
+
+  console.log(val,"============NAVBAR")
+
+
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -38,6 +46,9 @@ export default function Navbar() {
             />
           </svg>
         </button>
+      <p className="text-white">{str}</p>
+       
+      
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
@@ -70,6 +81,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setShowSidebar(!showSidebar);
+                  val.setStrcontext({...val.strContext,another:"this is second line"})
                 }}
               >
                 {" "}

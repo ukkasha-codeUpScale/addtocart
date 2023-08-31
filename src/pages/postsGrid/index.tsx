@@ -1,10 +1,14 @@
 // components/Grid.js or components/Grid.tsx
 import { useState } from "react";
 import Link from "next/link";
+import { useContext } from "react";
+import { cartDataContext } from "@/components/Layout";
+
 
 const itemsPerPage = 8;
 
 const Grid = ({ items }: any) => {
+  
   const [currentPage, setCurrentPage] = useState(1);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -24,6 +28,15 @@ const Grid = ({ items }: any) => {
   return (
     <div>
       <div className="grid grid-cols-4 gap-4 mt-5 ">
+        {/* <cartDataContext.Consumer>
+          {(itm)=>{
+            return(
+              <>
+              <p className="text-black">this is consumer ,{itm}</p>
+              </>
+            );
+          }}
+        </cartDataContext.Consumer> */}
         {currentItems.map((item: any, index: any) => (
           <div key={index} className="block max-w-[18rem] ">
             <Link href={`./postsGrid/${item.id}`}>
