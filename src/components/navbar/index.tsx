@@ -8,9 +8,9 @@ export default function Navbar() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const val = useContext(cartDataContext);
-  const str = val?.strContext.str1;
+  // const str = val?.strContext.str1;
 
-  console.log(val,"============NAVBAR")
+  // console.log(val,"============NAVBAR")
 
 
 
@@ -46,7 +46,6 @@ export default function Navbar() {
             />
           </svg>
         </button>
-      <p className="text-white">{str}</p>
        
       
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -81,7 +80,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setShowSidebar(!showSidebar);
-                  val.setStrcontext({...val.strContext,another:"this is second line"})
+                  // val.setStrcontext({...val.strContext,another:"this is second line"})
                 }}
               >
                 {" "}

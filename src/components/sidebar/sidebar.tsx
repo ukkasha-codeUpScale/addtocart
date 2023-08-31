@@ -5,8 +5,8 @@ import { cartDataContext } from "../Layout";
 const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
 
     const val = useContext(cartDataContext);
-    const str = val?.strContext.another;
-    console.log(val,"============SIDEBAR")
+    // const str = val?.strContext.another;
+    // console.log(val,"============SIDEBAR")
 
 
   return (
