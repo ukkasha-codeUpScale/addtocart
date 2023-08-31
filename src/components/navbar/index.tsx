@@ -8,10 +8,7 @@ export default function Navbar() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const val = useContext(cartDataContext);
-  // const str = val?.strContext.str1;
-
-  // console.log(val,"============NAVBAR")
-
+ 
 
 
   return (
