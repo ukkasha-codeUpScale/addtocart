@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { cartDataContext } from "./Layout";
 
 export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }: any) {
+  
+  let val = useContext(cartDataContext);
+
+  console.log(val,"+++++++++++")
+
+
+  function handleAddItemToCart(){
+    val.setStrcontext([...val.strContext,{
+      id:data.id,
+      name:data.title,
+      actualPrice : data.price,
+      quantity:Titems,
+      TotalPrice:Titems*data.price
+    }])
+  }
+
+
+
   return (
     <>
-      <div className="inline-flex rounded-md shadow-sm  " role="group">
+      <div className="bg-gray-700 inline-flex rounded-md shadow-sm  " role="group">
         <button
           type="button"
           onClick={() => {
@@ -105,7 +124,10 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
         </button>
         <button
           type="button"
-          className="ml-4 text-white flex justify-center self-center items-center p-2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          className="ml-4  text-white flex justify-center self-center items-center p-2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          onClick={
+               handleAddItemToCart}
+        
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

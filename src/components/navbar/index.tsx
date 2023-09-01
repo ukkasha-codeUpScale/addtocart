@@ -1,18 +1,15 @@
 // components/Navbar.js or components/Navbar.tsx
 import Link from "next/link";
 import Sidebar from "../sidebar/sidebar";
-import React, { useState , useContext} from "react";
+import React, { useState, useContext } from "react";
 import { cartDataContext } from "../Layout";
 
 export default function Navbar() {
   const [showSidebar, setShowSidebar] = useState(false);
-
   const val = useContext(cartDataContext);
- 
-
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-gray-700 border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href={"/"} className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -43,10 +40,9 @@ export default function Navbar() {
             />
           </svg>
         </button>
-       
-      
+
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="font-medium flex flex-col items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
               <Link
                 href={"/"}
@@ -77,34 +73,46 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setShowSidebar(!showSidebar);
-                  // val.setStrcontext({...val.strContext,another:"this is second line"})
                 }}
               >
-                {" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="white"
-                  className="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                  />
-                </svg>
+                  <div className="relative py-2">
+                    
+                    
+                {val.strContext.length > 0 ? (
+                    <div className="t-0 absolute left-3">
+                      <p className="flex h-1 w-1 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
+                        {val.strContext.length}
+                      </p>
+                    </div>
+                ) : null}
+                    
+                    
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="white"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                      />
+                    </svg>
+                  </div>
               </button>
               <div
-        className={`top-0 right-0 w-[35vw] bg-gray-900  py-10 pl-10 text-white fixed h-full z-40  ease-in-out duration-300 ${
-          showSidebar ? "translate-x-0 " : "translate-x-full"
-        }`}
-      >
-
-<Sidebar setShowSidebar={setShowSidebar} showSidebar={showSidebar}/>
-
-      </div>
+                className={`top-0 right-0 w-[35vw] bg-gray-900  px-5 py-10 text-white fixed h-full z-40  ease-in-out duration-300 ${
+                  showSidebar ? "translate-x-0 " : "translate-x-full"
+                }`}
+              >
+                <Sidebar
+                  setShowSidebar={setShowSidebar}
+                  showSidebar={showSidebar}
+                />
+              </div>
             </li>
           </ul>
         </div>

@@ -9,7 +9,7 @@ export const cartDataContext = createContext({});
 
 const Layout = ({ children }:any) => {
 
-  const [strContext, setStrcontext] = useState({str1:"this is one"})
+  const [strContext, setStrcontext] = useState([])
 
 
 

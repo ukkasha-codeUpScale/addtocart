@@ -6,11 +6,21 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
 
     const val = useContext(cartDataContext);
     // const str = val?.strContext.another;
-    // console.log(val,"============SIDEBAR")
+    const cartItems = val.strContext;
+    console.log(val.strContext,"============SIDEBAR")
 
+    function handleCartItmDelete(ID:any){
+     console.log("ID of an object",ID)
+    //    cartItems.map((index:any, cartitm:any)=>{
+    //  if(cartitm.id === ID)
+    //  {
+    //   [...cartItems,cartItems.splice(index,1)]
+    //  }}
+    //  ) 
+    }
 
   return (
-    <div>
+    <div className="">
       <button
         onClick={() => {
           setShowSidebar(false);
@@ -32,12 +42,35 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
           />
         </svg>
       </button>
-      <hr className="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700" />
+      <h1 className="flex justify-center self-center text-4xl text-white ">Your Cart Items</h1>
+      <hr className="w-48 h-1 mx-auto my-1 bg-gray-100 border-0 rounded md:my-1 dark:bg-gray-700" />
 
-      <h3 className="mt-2 text-4xl font-semibold text-white">
-        All items in Cart will be displayed here....
-      </h3>
+     
+        {
+          cartItems.map((item:any)=>{
+            return(
+              <div key={item.id} className="flex flex-col p-2 border-solid border-2 rounded-lg mt-2 border-sky-800  hover:bg-gray-800 cursor-pointer">
 
+                <button className="flex self-end bg-transparent border-none px-1 hover:bg-red-400 hover:px-1 hover:border rounded-sm"
+                onClick={handleCartItmDelete(item.id)}
+                >x</button>
+                <p className="text-md text-center">{item.name}</p>
+                <div className="flex justify-between font-light">
+                  <p>Quantity </p>
+                  <p>{item.quantity}</p>
+                </div>
+                <div className="flex justify-between font-light">
+                  <p>Price </p>
+                  <p className="text-green-500">{item.actualPrice}$</p>
+                </div>
+                <div className="flex justify-between font-light">
+                  <p>Total Price </p>
+                  <p className="text-red-500">{item.TotalPrice}$</p>
+                </div>
+              </div>
+            );
+          })
+        }
     </div>
   );
 };

@@ -94,10 +94,10 @@ const Grid = ({ items }: any) => {
           <button
             key={index}
             onClick={() => goToPage(index + 1)}
-            className={`mx-1 px-4 py-2 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700${
+            className={`mx-1 px-4  py-2 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-white focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-black focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-black dark:hover:bg-gray-700${
               currentPage === index + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300"
+                ? "bg-gray-500 text-white"
+                : "bg-gray-700"
             }`}
           >
             {index + 1}
