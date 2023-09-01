@@ -9,15 +9,15 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
     const cartItems = val.strContext;
     console.log(val.strContext,"============SIDEBAR")
 
-    function handleCartItmDelete(ID:any){
-     console.log("ID of an object",ID)
+    // function handleCartItmDelete(ID:any){
+    //  console.log("ID of an object",ID)
     //    cartItems.map((index:any, cartitm:any)=>{
     //  if(cartitm.id === ID)
     //  {
     //   [...cartItems,cartItems.splice(index,1)]
     //  }}
     //  ) 
-    }
+    // }
 
   return (
     <div className="">
@@ -52,7 +52,7 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
               <div key={item.id} className="flex flex-col p-2 border-solid border-2 rounded-lg mt-2 border-sky-800  hover:bg-gray-800 cursor-pointer">
 
                 <button className="flex self-end bg-transparent border-none px-1 hover:bg-red-400 hover:px-1 hover:border rounded-sm"
-                onClick={handleCartItmDelete(item.id)}
+                // onClick={handleCartItmDelete(item.id)}
                 >x</button>
                 <p className="text-md text-center">{item.name}</p>
                 <div className="flex justify-between font-light">
