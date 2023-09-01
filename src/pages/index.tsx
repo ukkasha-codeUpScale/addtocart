@@ -8,9 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home({ data }:any) {
   console.log(data,"============")
   return (
-   <div>
-    <h4>All items</h4>
-    <hr className='w-20 bg-gray-600'/>
+   <div> 
     <Grid items={data}/>
    </div>
   )

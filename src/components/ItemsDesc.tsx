@@ -1,14 +1,18 @@
-import React, { useState, useContext } from "react";
+ import React, { useState, useContext } from "react";
 import { cartDataContext } from "./Layout";
+import toast from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+
 
 export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }: any) {
   
   let val = useContext(cartDataContext);
-
-  console.log(val,"+++++++++++")
-
+  // console.log(val,"+++++++++++")
 
   function handleAddItemToCart(){
+    console.log("ID values of item in itms desc file ",data.id)
+    
+
     val.setStrcontext([...val.strContext,{
       id:data.id,
       name:data.title,
@@ -16,9 +20,16 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
       quantity:Titems,
       TotalPrice:Titems*data.price
     }])
+    toast.success('Successfully Added item!')
   }
 
 
+  // if(val.strContext.length > 0)
+  // {
+  // console.log("Cart items ==== ",
+  //   val.strContext[0].id
+  //   )
+  // }
 
   return (
     <>
@@ -126,7 +137,9 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
           type="button"
           className="ml-4  text-white flex justify-center self-center items-center p-2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-md text-sm  dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
           onClick={
-               handleAddItemToCart}
+               handleAddItemToCart
+              
+              }
         
         >
           <svg
@@ -144,6 +157,7 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
             />
           </svg>
           Add to cart
+        <Toaster />
         </button>
         </div>
        

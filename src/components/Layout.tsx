@@ -11,9 +11,6 @@ const Layout = ({ children }:any) => {
 
   const [strContext, setStrcontext] = useState([])
 
-
-
-
   return (
     <>
     <cartDataContext.Provider value={{strContext, setStrcontext}}>

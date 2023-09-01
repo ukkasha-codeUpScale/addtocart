@@ -3,21 +3,30 @@ import { cartDataContext } from "../Layout";
 
 
 const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
+    let arr :any= [];
 
     const val = useContext(cartDataContext);
-    // const str = val?.strContext.another;
-    const cartItems = val.strContext;
-    console.log(val.strContext,"============SIDEBAR")
+    const cartItems = val?.strContext;
 
-    // function handleCartItmDelete(ID:any){
-    //  console.log("ID of an object",ID)
-    //    cartItems.map((index:any, cartitm:any)=>{
-    //  if(cartitm.id === ID)
-    //  {
-    //   [...cartItems,cartItems.splice(index,1)]
-    //  }}
-    //  ) 
-    // }
+    cartItems.map(( cartitm:any, index:any)=>{
+        if(arr.includes(cartitm.id))
+        {
+          console.log(cartitm ,"Prev Quantity")
+          const addPrev = arr.indexOf(cartitm.id)
+          cartitm.quantity = cartItems[addPrev].quantity + cartitm.quantity
+          console.log(cartitm ,"Updated Quantity")
+          cartItems.splice(addPrev,1)
+        }
+        arr.push(cartitm.id)
+      }
+     ) 
+
+    function handleCartItmDelete(itmEvent:any){
+      console.log("Item from close button",itmEvent)
+      cartItems.pop(itmEvent)
+    }
+
+  
 
   return (
     <div className="">
@@ -45,14 +54,18 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
       <h1 className="flex justify-center self-center text-4xl text-white ">Your Cart Items</h1>
       <hr className="w-48 h-1 mx-auto my-1 bg-gray-100 border-0 rounded md:my-1 dark:bg-gray-700" />
 
-     
+        <div className=" text-left overflow-x-auto max-h-screen
+        scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-300
+        
+        ">
+
         {
           cartItems.map((item:any)=>{
             return(
               <div key={item.id} className="flex flex-col p-2 border-solid border-2 rounded-lg mt-2 border-sky-800  hover:bg-gray-800 cursor-pointer">
 
                 <button className="flex self-end bg-transparent border-none px-1 hover:bg-red-400 hover:px-1 hover:border rounded-sm"
-                // onClick={handleCartItmDelete(item.id)}
+                onClick={()=>{handleCartItmDelete(cartItems.indexOf(item))}}
                 >x</button>
                 <p className="text-md text-center">{item.name}</p>
                 <div className="flex justify-between font-light">
@@ -71,6 +84,7 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
             );
           })
         }
+        </div>
     </div>
   );
 };
