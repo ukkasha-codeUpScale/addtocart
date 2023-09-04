@@ -5,7 +5,7 @@ import React, { useState, useContext } from "react";
 import { cartDataContext } from "../Layout";
 
 export default function Navbar() {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const val = useContext(cartDataContext);
 
   return (
@@ -110,7 +110,6 @@ export default function Navbar() {
               >
                 <Sidebar
                   setShowSidebar={setShowSidebar}
-                  showSidebar={showSidebar}
                 />
               </div>
             </li>

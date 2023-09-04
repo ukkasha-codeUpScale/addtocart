@@ -2,10 +2,12 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import Grid from '@/pages/postsGrid'
- 
+import { ApiDataEntity } from '@/models/data/apidata.entity' 
+
+
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ data }:any) {
+export default function Home({ data }:{data:ApiDataEntity}) {
   console.log(data,"============")
   return (
    <div> 

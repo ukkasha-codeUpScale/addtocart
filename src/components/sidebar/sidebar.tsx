@@ -1,20 +1,28 @@
 import React, { useState , useContext} from "react";
 import { cartDataContext } from "../Layout";
+import { CartItmEntity } from "@/models/cart.item.entity";
 
+interface SideBarProps{
+  setShowSidebar: (value: boolean) => void; 
+}
 
-const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
-    let arr :any= [];
+interface CARTITMSENTITY{
+  item : CartItmEntity[]
+}
+
+const Sidebar = ({ setShowSidebar }: SideBarProps) => {
+    let arr :number[]= [];
 
     const val = useContext(cartDataContext);
     const cartItems = val?.strContext;
 
-    cartItems.map(( cartitm:any, index:any)=>{
+
+    cartItems?.map(( cartitm:any, index:number)=>{
         if(arr.includes(cartitm.id))
         {
-          console.log(cartitm ,"Prev Quantity")
           const addPrev = arr.indexOf(cartitm.id)
           cartitm.quantity = cartItems[addPrev].quantity + cartitm.quantity
-          console.log(cartitm ,"Updated Quantity")
+          cartitm.TotalPrice = cartItems[addPrev].TotalPrice + cartitm.TotalPrice
           cartItems.splice(addPrev,1)
         }
         arr.push(cartitm.id)
@@ -22,8 +30,8 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
      ) 
 
     function handleCartItmDelete(itmEvent:any){
-      console.log("Item from close button",itmEvent)
-      cartItems.pop(itmEvent)
+      // console.log("Item from close button",itmEvent)
+      cartItems.splice(itmEvent)
     }
 
   
@@ -60,7 +68,8 @@ const Sidebar = ({ setShowSidebar, showSidebar }: any) => {
         ">
 
         {
-          cartItems.map((item:any)=>{
+          cartItems?.map((item:CartItmEntity)=>{
+            console.log(item,"=======================Cart Items")
             return(
               <div key={item.id} className="flex flex-col p-2 border-solid border-2 rounded-lg mt-2 border-sky-800  hover:bg-gray-800 cursor-pointer">
 

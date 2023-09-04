@@ -3,11 +3,16 @@ import { useState } from "react";
 import Link from "next/link";
 import { useContext } from "react";
 import { cartDataContext } from "@/components/Layout";
+import { ApiDataEntity } from "@/models/data/apidata.entity";
 
+
+interface GridProps{
+  items:ApiDataEntity[]
+}
 
 const itemsPerPage = 8;
 
-const Grid = ({ items }: any) => {
+const Grid:React.FC<GridProps>= ({ items }) => {
   
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -21,7 +26,7 @@ const Grid = ({ items }: any) => {
 
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  const goToPage = (page: any) => {
+  const goToPage = (page: number) => {
     setCurrentPage(page);
   };
 
