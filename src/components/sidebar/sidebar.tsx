@@ -6,9 +6,6 @@ interface SideBarProps{
   setShowSidebar: (value: boolean) => void; 
 }
 
-interface CARTITMSENTITY{
-  item : CartItmEntity[]
-}
 
 const Sidebar = ({ setShowSidebar }: SideBarProps) => {
     let arr :number[]= [];
@@ -17,7 +14,7 @@ const Sidebar = ({ setShowSidebar }: SideBarProps) => {
     const cartItems = val?.strContext;
 
 
-    cartItems?.map(( cartitm:any, index:number)=>{
+    cartItems?.map(( cartitm:CartItmEntity, index:number)=>{
         if(arr.includes(cartitm.id))
         {
           const addPrev = arr.indexOf(cartitm.id)
@@ -29,7 +26,7 @@ const Sidebar = ({ setShowSidebar }: SideBarProps) => {
       }
      ) 
 
-    function handleCartItmDelete(itmEvent:any){
+    function handleCartItmDelete(itmEvent:number){
       // console.log("Item from close button",itmEvent)
       cartItems.splice(itmEvent)
     }
@@ -93,6 +90,8 @@ const Sidebar = ({ setShowSidebar }: SideBarProps) => {
             );
           })
         }
+
+        <button>Check Out</button>
         </div>
     </div>
   );

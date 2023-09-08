@@ -2,23 +2,29 @@
 import { cartDataContext } from "./Layout";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
+import { ApiDataEntity } from "@/models/data/apidata.entity";
 
+export interface DescDetails {
+  data?: ApiDataEntity;
+  setTitems?: (value: number) => void;
+  Titems?: number;
+  setTprice?: (value: number) => void;
+}
 
-export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }: any) {
+export default function ItemsDesc(props: DescDetails) {
   
   let val = useContext(cartDataContext);
   // console.log(val,"+++++++++++")
 
   function handleAddItemToCart(){
-    console.log("ID values of item in itms desc file ",data.id)
     
 
     val.setStrcontext([...val.strContext,{
-      id:data.id,
-      name:data.title,
-      actualPrice : data.price,
-      quantity:Titems,
-      TotalPrice:Titems*data.price
+      id:props?.data?.id,
+      name:props?.data.title,
+      actualPrice :props?.data.price,
+      quantity:props?.Titems,
+      TotalPrice:props?.Titems*props?.data.price
     }])
     toast.success('Successfully Added item!')
   }
@@ -37,8 +43,8 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
         <button
           type="button"
           onClick={() => {
-            if (Titems > 0) {
-              setTitems(Titems - 1);
+            if (props?.Titems > 0) {
+              props?.setTitems(props?.Titems - 1);
             }
           }}
           className="px-4 py-2 text-sm font-medium text-white bg-gray-700 border border-gray-700 rounded-l-lg hover:bg-gray-700 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
@@ -54,8 +60,8 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
         <button
           type="button"
           onClick={() => {
-            setTitems(Titems + 1);
-            setTprice(data.price * Titems)
+            props?.setTitems(props?.Titems + 1);
+            props?.setTprice(props?.data.price * props?.Titems)
           }}
           className="px-4 py-2 text-sm  font-medium text-white bg-gray-700 border border-gray-700 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
         >
@@ -63,7 +69,7 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
         </button>
       </div>
       <div className="flex flex-col">
-        <p className="text-justify text-black font-light text-sm">{data.description}</p>
+        <p className="text-justify text-black font-light text-sm">{props?.data.description}</p>
       </div>
 {/* Table */}
 <div className="  w-full ">
@@ -79,9 +85,9 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
   </thead>
   <tbody>
     <tr>
-      <td className="text-left text-sm ">{data.title}</td>
-      <td className="">{Titems}</td>
-      <td className="text-red-500 font-bold">{ data.price*Titems}$</td>
+      <td className="text-left text-sm ">{props?.data.title}</td>
+      <td className="">{props?.Titems}</td> 
+      <td className="text-red-500 font-bold">{ props?.data.price*props?.Titems}$</td>
     </tr>
     
   </tbody>
@@ -101,14 +107,14 @@ export default function ItemsDesc({ data, setTitems, Titems, Tprice, setTprice }
             <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
           </svg>
           <p className="ml-2 text-sm font-light text-gray-900 dark:text-black">
-            {data.rating.rate}
+            {props?.data.rating.rate}
           </p>
           <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
           <a
             href="#"
             className="text-sm font-light text-gray-900 underline hover:no-underline dark:text-black"
           >
-            {data.rating.count} reviews
+            {props?.data.rating.count} reviews
           </a>
         </div>
 

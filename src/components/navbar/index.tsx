@@ -1,12 +1,19 @@
 // components/Navbar.js or components/Navbar.tsx
 import Link from "next/link";
 import Sidebar from "../sidebar/sidebar";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { cartDataContext } from "../Layout";
 
-export default function Navbar() {
+export default function Navbar(props : any) {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const val = useContext(cartDataContext);
+
+  // useEffect(() => {
+  //   const data = localStorage.getItem("username");
+  //   if (data !== null) {
+  //     setLocalData(data);
+  //   }
+  // }, []);
 
   return (
     <nav className="bg-gray-700 border-gray-200 dark:bg-gray-900">
@@ -69,48 +76,90 @@ export default function Navbar() {
                 Contact
               </Link>
             </li>
+            {props.locaData !== null ? (
+              <li className="relative group text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 font-medium rounded-lg text-sm  p-2.5  items-start dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                <a href="#" className="hover:text-blue-500">
+                  Hi {props.locaData}
+                </a>
+                <div className="hidden absolute z-50 mt-1 left-0 space-y-2 bg-white text-gray-900 rounded-lg group-hover:block ">
+                  <li>
+                    <Link
+                      href={"/users/dashboard"}
+                      className="block px-4 py-2 hover:bg-blue-500 rounded-lg hover:text-white"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={"/users/settings"}
+                      className="block px-4 py-2 hover:bg-blue-500 rounded-lg hover:text-white"
+                    >
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                    onClick={()=>{localStorage.clear()
+                      window.location.reload();
+                    }}
+                      href={"/"}
+                      className="block px-4 py-2 hover:bg-blue-500 rounded-lg hover:text-white"
+                    >
+                      Log Out
+                    </Link>
+                  </li>
+                </div>
+              </li>
+            ) : (
+              <li>
+                <Link
+                  href={"/login"}
+                  className="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  Login
+                </Link>
+              </li>
+            )}
+
             <li>
               <button
                 onClick={() => {
                   setShowSidebar(!showSidebar);
                 }}
               >
-                  <div className="relative py-2">
-                    
-                    
-                {val.strContext.length > 0 ? (
+                <div className="relative py-2">
+                  {val.strContext.length > 0 ? (
                     <div className="t-0 absolute left-3">
                       <p className="flex h-1 w-1 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">
                         {val.strContext.length}
                       </p>
                     </div>
-                ) : null}
-                    
-                    
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="white"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-                      />
-                    </svg>
-                  </div>
+                  ) : null}
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="white"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                    />
+                  </svg>
+                </div>
               </button>
+
               <div
                 className={`top-0 right-0 w-[35vw] bg-gray-900  px-5 py-10 text-white fixed min-h-screen z-40  ease-in-out duration-300 ${
                   showSidebar ? "translate-x-0 " : "translate-x-full"
                 }`}
               >
-                <Sidebar
-                  setShowSidebar={setShowSidebar}
-                />
+                <Sidebar setShowSidebar={setShowSidebar} />
               </div>
             </li>
           </ul>

@@ -1,7 +1,7 @@
 export class ApiDataEntity{
     id?:number;
     title?:string;
-    price?:Float32Array;
+    price?:number;
     description?:string;
     category?:string;
     image?:string;
